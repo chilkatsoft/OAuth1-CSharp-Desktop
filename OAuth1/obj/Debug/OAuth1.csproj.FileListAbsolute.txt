@@ -1,0 +1,10 @@
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\bin\Debug\OAuth1.exe.config
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\bin\Debug\OAuth1.exe
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\bin\Debug\OAuth1.pdb
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\bin\Debug\ChilkatDotNet45.dll
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\obj\Debug\OAuth1.csprojResolveAssemblyReference.cache
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\obj\Debug\OAuth1.Form1.resources
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\obj\Debug\OAuth1.Properties.Resources.resources
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\obj\Debug\OAuth1.csproj.GenerateResource.Cache
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\obj\Debug\OAuth1.exe
+C:\ckGitHubProjects\OAuth1-CSharp-Desktop\OAuth1\obj\Debug\OAuth1.pdb
