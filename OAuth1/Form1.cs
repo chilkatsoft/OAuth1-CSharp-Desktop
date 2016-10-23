@@ -94,6 +94,9 @@ namespace OAuth1
 
         private Chilkat.Socket m_listenSocket = null;
 
+        // We'll set this to "quickbooks", "twitter", "xero", or "magento" so we can take special action in the code that is common to all..
+        private string m_providerName = "";
+
         // ------------------------------------------------------------------------------------------------------
 
         // Creates a socket and listens on port 3017 for the expected callback from the browser.
@@ -207,13 +210,22 @@ namespace OAuth1
             // For example, the startLine will look like this:
             //  GET /?oauth_token=abcdRQAAZZAAxfBBAAABVabcd_k&oauth_verifier=9rdOq5abcdCe6cn8M3jabcdj3Eabcd HTTP/1.1
 
-            string queryParams = startLine.Replace("GET /?", "").Replace(" HTTP/1.1", "");
+            string queryParams = startLine.Replace("GET /?", "").Replace(" HTTP/1.1", "").Trim();
 
             Chilkat.Hashtable hashTab = new Chilkat.Hashtable();
             hashTab.AddQueryParams(queryParams);
 
             OAuthRequestToken = hashTab.LookupStr("oauth_token");
             OAuthVerifier = hashTab.LookupStr("oauth_verifier");
+
+            // Save a few extra items for quickbooks.
+            string realmId = "";
+            string dataSource = "";
+            if (m_providerName.Equals("quickbooks"))
+                {
+                realmId = hashTab.LookupStr("realmId");
+                dataSource = hashTab.LookupStr("dataSource");
+                }
 
             // ------------------------------------------------------------------------------
             // Finally , we must exchange the OAuth Request Token for an OAuth Access Token.
@@ -268,6 +280,11 @@ namespace OAuth1
             Chilkat.JsonObject json = new Chilkat.JsonObject();
             json.AppendString("oauth_token", OAuthAccessToken);
             json.AppendString("oauth_token_secret", OAuthAccessTokenSecret);
+            if (m_providerName.Equals("quickbooks"))
+                {
+                json.AppendString("realmId", realmId);
+                json.AppendString("dataSource", dataSource);
+                }
             System.IO.File.WriteAllText(SaveToFile, json.Emit());
 
             return;
@@ -336,6 +353,7 @@ namespace OAuth1
             {
             textBox1.Text = "";
 
+            m_providerName = "twitter";
             ConsumerKey = TwConsumerKey;
             ConsumerSecret = TwConsumerSecret;
             RequestTokenUrl = TwRequestTokenUrl;
@@ -351,6 +369,7 @@ namespace OAuth1
             {
             textBox1.Text = "";
 
+            m_providerName = "quickbooks";
             ConsumerKey = QbConsumerKey;
             ConsumerSecret = QbConsumerSecret;
             RequestTokenUrl = QbRequestTokenUrl;
@@ -366,6 +385,7 @@ namespace OAuth1
             {
             textBox1.Text = "";
 
+            m_providerName = "xero";
             ConsumerKey = XeroConsumerKey;
             ConsumerSecret = XeroConsumerSecret;
             RequestTokenUrl = XeroRequestTokenUrl;
@@ -381,6 +401,7 @@ namespace OAuth1
             {
             textBox1.Text = "";
 
+            m_providerName = "magento";
             ConsumerKey = MagentoConsumerKey;
             ConsumerSecret = MagentoConsumerSecret;
             RequestTokenUrl = MagentoRequestTokenUrl;
